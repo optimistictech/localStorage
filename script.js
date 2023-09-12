@@ -2,9 +2,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const signupForm = document.getElementById("signup-form");
     const loginForm = document.getElementById("login-form");
 
+    // Function to toggle active form
+    function toggleForm(activeForm) {
+        signupForm.classList.remove("active-form");
+        loginForm.classList.remove("active-form");
+        activeForm.classList.add("active-form");
+    }
+
     // Signup logic
-    signupForm.addEventListener("submit", function (e) {
-        e.preventDefault();
+    window.signup = function() {  
         const username = document.getElementById("signup-username").value;
         const password = document.getElementById("signup-password").value;
 
@@ -15,15 +21,15 @@ document.addEventListener("DOMContentLoaded", function () {
             // Store username and password in localStorage
             localStorage.setItem(username, password);
             alert("Signup successful! You can now login.");
+            toggleForm(loginForm);
         }
 
         // Clear signup form
         signupForm.reset();
-    });
+    }
 
     // Login logic
-    loginForm.addEventListener("submit", function (e) {
-        e.preventDefault();
+    window.login = function() {  
         const username = document.getElementById("login-username").value;
         const password = document.getElementById("login-password").value;
 
@@ -40,5 +46,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Clear login form
         loginForm.reset();
-    });
+    }
+
+    // Initially, display the signup form
+    toggleForm(signupForm);
 });
